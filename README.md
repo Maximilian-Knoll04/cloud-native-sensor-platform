@@ -13,5 +13,6 @@ Die Daten werden zeitlich erfasst und können über eine Statistik-Schnittstelle
   - Als Kunde möchte ich Sensordaten erfassen können
   - Als Kunde möchte ich Sensordaten als Statistiken betrachten
 ## Architektur
-<img width="1426" height="579" alt="image" src="https://github.com/user-attachments/assets/193fcbeb-195d-431f-8f7e-e65468a3a172" />
+<img width="1296" height="559" alt="image" src="https://github.com/user-attachments/assets/ee38cd6e-ceed-4e5f-9dc8-dc1eb919212a" />
+
 
