@@ -33,3 +33,44 @@ Der Einfachheit halber wird in diesem Projekt die Menge an Sensoren pro Kunde au
 6.) ...und bekommt Zertifikate zur Verbindung mit der IoT Schnittstelle zurückgeliefert 
 
 7.) Das IoT Gerät kann dann mit den Zertifikaten seine Daten an die Plattform schicken
+
+## AWS Anwendungen
+### DynamoDB
+Zum persistieren der Sensordaten ist eine Datenbank notwendig. Hierzu wird die NoSQL Datenbank "DynamoDB" von AWS genommen. Diese eignet sich gut für horizontale Skalierung und Verfügbarkeit. Zudem ist diese schnell eingerichtet. Eine weiterer Entscheidungsgrund gegenüber einer relationalen Datenbank wie RDS von AWS ist, dass die Konsistenz der Daten keine Rolle spielt, oder zumindest die gespeicherten Daten nicht kritisch sind sondern lediglich Logs sind.
+
+Hier das Schema, an das sich gehalten wird:
+
+> [!NOTE]
+> customerId und timestamp bilden den Composition Key. Vergleichsweise ist es ein zusammengesetzter Primärschlüssel.
+
+| Attribute | Key-Type | Example |
+|-----| ---- | --- |
+|customerId| Primary Key (Partition) | 27358
+|timestamp| Secondary Key (Sort) | 2022-07-13T09:23:45
+|temperature| - | 24.6
+
+
+
+### Lambda
+In diesem Projekt werden lediglich 3 Funktionen benötigt. Diese sind:
+  - Das Erstellen eines Sensors
+  - Der Abruf der Sensordaten
+  - Das Schreiben neuer Sensordaten
+
+Daher eignet sich eine FaaS-Lösung (Function-as-a-Service), in der man lediglich die benötigten Funktionen implementieren muss.
+Diese kommunizieren dann intern über die AWS SDK mit den anderen Anwendungen wie DynamoDB oder IoT Core.
+
+
+### API Gateway
+Um HTTP-Schnittstellen nach außen in das weltweite Internet verfügbar zu machen, wird API Gateway verwendet. Es bietet vor allem die Möglichkeit Lambda Funktionen als Handler für bereitgestellte Schnittstellen anzuhängen und die empfangenen Daten mitzuleiten. Zudem kann auch die Nutzung der Schnittstellen auf authentifizierte Benutzer beschränt werden um anonyme oder nicht-Benutzer zu blockieren. Damit wird dafür gesorgt, dass sich die Lambda Funktionen keine Authentifizierung vornehmen müssen.
+
+Momentan sind folgende Schnittstellen angedacht:
+
+| Bezeichnung | Ressource |
+|-------------|-----------|
+| Lesen von Daten | GET /sensor-data |
+| Anlegen von einem neuen Sensor | POST /sensors |
+
+
+
+
