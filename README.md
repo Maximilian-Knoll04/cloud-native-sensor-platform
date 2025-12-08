@@ -1,5 +1,18 @@
 # cloud-native-sensor-platform
 
+## Inhaltsverzeichnis
+  - [Beschreibung](#beschreibung)
+  - [User Stories](#user-stories)
+  - [Architektur](#architektur)
+  - [Funktionsweise](#funktionsweise)
+  - [AWS Anwendungen](#aws-anwendungen)
+      - [DynamoDB](#dynamodb)
+      - [Lambda](#lambda)
+      - [API Gateway](#api-gateway)
+      - [IoT Core](#iot-core)
+      - [Cognito](#cognito)
+      - [Amplify](#amplify)
+
 ## Beschreibung
 Es geht um eine Web-Platform zur Verwaltung von Sensordaten von Kunden.
 Jeder kann sich als Kunde registrieren und eigene Sensoren registrieren.
@@ -71,6 +84,16 @@ Momentan sind folgende Schnittstellen angedacht:
 | Lesen von Daten | GET /sensor-data |
 | Anlegen von einem neuen Sensor | POST /sensors |
 
+### IoT Core
+Damit Temperatursensoren ihre Daten an die Plattform senden können, benötigen diese Zertifikate, da diese über andere Authentifizierungsmechanismen verifiziert werden können. Hierfür stellt die Anwendung IoT Core von AWS die Möglichkeit bereit, Geräte (sogenannte "Things") anzulegen. Diese können sowohl per Hand als auch über die AWS API erstellt werden. Damit ist die Erstellung und Rücklieferung der Zertifikate über AWS Lambda automatisierbar und für die Plattform geeignet.
 
+> [!WARNING]
+> Ein Problem bei der Ausstellung der Zertifikate ist, dass sich diese nur einmalig ausstellen lassen. Das heißt bei Verlust der Zertifikate muss ein neues "Thing" erstellt werden. In diesem Projekt wird sich aber nur auf die einmalige Erstellung eines "Things" beschränkt, was beim Ausprobieren berücksichtigt werden muss
 
+### Cognito
 
+Zur Benutzerverwaltung und der generellen Auth Methoden wird AWS Cognito verwendet. Diese Anwendung ermöglicht es, Anmeldungen, Registrierungen sowie Richtlinien unter den Komponenten des Gesamtsystems durchzuführen und zu verwalten. Damit wird ein erheblich großer Aufwand annuliert. 
+
+### Amplify
+
+Um die Webseite für die Plattform bereitzustellen wird AWS Amplify verwendet. Es gibt einem die Möglichkeit, die Webseite über eine Versionsverwaltung zu verwalten. Der größte Knackpunkt liegt jedoch in der Bereitstellung von Javascript-Bibliotheken, die sich in das Gesamtsystem von AWS integrieren lassen. Die daraus bestehende SDK (Software Development Kit) gibt dem Frontend die Möglichkeit, ganz einfach mit den AWS Komponenten zu kommunizieren. Damit wird einem die Arbeit zur Erstellung eigener geeigneter Kommunikationsmechanismen mit AWS (wie etwa Cognito für Auth oder API Gateway für REST Calls) genommen.
