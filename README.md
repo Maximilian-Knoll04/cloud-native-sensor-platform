@@ -97,3 +97,11 @@ Zur Benutzerverwaltung und der generellen Auth Methoden wird AWS Cognito verwend
 ### Amplify
 
 Um die Webseite für die Plattform bereitzustellen wird AWS Amplify verwendet. Es gibt einem die Möglichkeit, die Webseite über eine Versionsverwaltung zu verwalten. Der größte Knackpunkt liegt jedoch in der Bereitstellung von Javascript-Bibliotheken, die sich in das Gesamtsystem von AWS integrieren lassen. Die daraus bestehende SDK (Software Development Kit) gibt dem Frontend die Möglichkeit, ganz einfach mit den AWS Komponenten zu kommunizieren. Damit wird einem die Arbeit zur Erstellung eigener geeigneter Kommunikationsmechanismen mit AWS (wie etwa Cognito für Auth oder API Gateway für REST Calls) genommen.
+
+## Umsetzung
+Folgend wird erklärt, wie die Plattform auf AWS umgesetzt wird mit einer Schritt-für-Schritt Anleitung
+
+### Anlegen einer DynamoDB-Tabelle
+
+### Anlegen von Lambda-Funktionen
+
