@@ -105,3 +105,10 @@ Folgend wird erklärt, wie die Plattform auf AWS umgesetzt wird mit einer Schrit
 
 ### Anlegen von Lambda-Funktionen
 
+### Anlegen von API Gateway-Schnittstellen
+
+### Anlegen des Cognito-Benutzerpools
+
+### Anlegen der Amplify Webseite
+
+### Anlegen der IoT Core Weiterleitung an Lambda
