@@ -23,6 +23,46 @@ Zu guter letzt wird auch die DynamoDB durch eine relationale Datenbank ersetzt, 
 <img width="1356" height="571" alt="image" src="https://github.com/user-attachments/assets/9647e180-d946-4bd8-84f7-3fb9b700d35a" />
 
 
+## Neues Datenbankschema
+
+Tabelle sensors
+
+| sensorId | userId (PK) |
+| --------- | ------------ |
+|   ...    |  ...   |
+
+
+Tabelle sensor-data
+
+| sensorId (PK) | timestamp (PK) | temperature |
+|----------|-----------|------------|
+|   ...    |     ...   |      ...   |
+
+> [!NOTE]
+> Bei den User Stories heißt es, dass jegliche Typen von Daten gespeichert werden können.
+> Hierbei wird sich jedoch der Einfachheit halber auf Temperaturen in °C (Celsius) beschränkt.
+
+
+## Erweiterung der API-Schnittstellen
+
+Zu allen Schnittstellen muss im Header der JWT Token mitgeliefert werden, um den User und seine Taten zu verifizieren. 
+
+Zu den vorhandenen 2 ersten Schnittstellen kommen weitere hinzu:
+
+| Bezeichnung | Ressource | Payload |
+|-------------|-----------| -------- |
+| Lesen von Daten | GET /sensor-data | - | 
+| Anlegen von einem neuen Sensor | POST /sensors | - |
+| Schreiben von Daten | POST /sensor-data | temperature-value |
+
+> [!NOTE]
+> Wegen der Einfachheit wird anhand des JWT Tokens die userId ermittelt, anhand der die sensorId ermittelt wird. Daher ist die Mitlieferung der sensorId in der Payload überflüssig.
+> Zudem schlägt die Erstellung eines neuen Sensors fehl, wenn schon ein Eintrag für eine userId in der sensors Tabelle existiert.
+
+## Dockerisierung
+Um die Spring Boot Anwendung in der Cloud als Container laufen zu lassen, wird AWS ECS (Elastic Container Service) verwendet. 
+
+
 ## Beschreibung
 Es geht um eine Web-Platform zur Verwaltung von Sensordaten von Kunden.
 Jeder kann sich als Kunde registrieren und eigene Sensoren registrieren.
