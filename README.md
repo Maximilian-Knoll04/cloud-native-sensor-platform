@@ -13,6 +13,16 @@
       - [Cognito](#cognito)
       - [Amplify](#amplify)
 
+
+## 19.12.2025 Überdenkung
+Um eine Mischung aus einer Spring Boot Komponente und dem Cloud Provider AWS zu machen, wird die Geschäftslogik (API Gateway und Lambda) in die Spring Boot Komponente verlagert.
+Zudem wird das IoT Core Service rausgenommen, um die Arbeitslast zu mindern. IoT Geräte werden somit in der Datenbank verwaltet.
+Zu guter letzt wird auch die DynamoDB durch eine relationale Datenbank ersetzt, um mit der vertrauten SQL Technologie zu arbeiten und den Einarbeitungsaufwand in NoSQL außen vor zu lassen.
+
+##Neue überdachte Architektur
+<img width="1356" height="571" alt="image" src="https://github.com/user-attachments/assets/9647e180-d946-4bd8-84f7-3fb9b700d35a" />
+
+
 ## Beschreibung
 Es geht um eine Web-Platform zur Verwaltung von Sensordaten von Kunden.
 Jeder kann sich als Kunde registrieren und eigene Sensoren registrieren.
