@@ -23,6 +23,8 @@ Die Daten werden zeitlich erfasst und können über eine Statistik-Schnittstelle
 
 Der Einfachheit halber wird in diesem Projekt die Menge an Sensoren pro Kunde auf einen Temperatur-Sensor in Celsius begrenzt. Ziel ist nämlich nur das Verstehen und Arbeiten mit AWS Diensten, sowie das Auslagern von Kritischen Anwendungen um effizienter und sicherer zu entwickeln.
 
+Aufgrund der Komplexität der Verwaltung für Sensorverifikation, kann jedoch nur der Kunde über die geeignete Schnittstelle Sensordaten senden.
+
 
 
 ## User Stories
@@ -41,8 +43,6 @@ Der Einfachheit halber wird in diesem Projekt die Menge an Sensoren pro Kunde au
 Um die Messwerte zu speichern werden folgende Tabellen verwendet:
 
 Tabelle sensors
-
-Pro Kunde gibt es genau einen Eintrag. Die ID des Kunden wird hier gespeichert, um 
 
 | sensorId (PK) | userId (PK) |
 | --------- | ------------ |
@@ -63,25 +63,8 @@ Es resultiert eine 1:n Beziehung zwischen sensors <-> sensor-data
 | Bezeichnung | Ressource | Payload |
 |-------------|-----------| -------- |
 | Lesen von Daten | GET /sensor-data | - | 
-| Anlegen von einem neuen Sensor | POST /sensors | - |
 | Schreiben von Daten | POST /sensor-data | temperature-value |
 
-## Funktionsweise
-<img width="1336" height="513" alt="image" src="https://github.com/user-attachments/assets/4998d343-9da7-4ba2-a3c6-58a4b0fa8546" />
-
-1.) Der Kunde ruft zunächst die Sensorplattform Webseite auf
-
-2.) Da dieser nicht angemeldet ist, wird dieser zur Anmeldung weitergeleitet
-
-3.) Nach erfolgreicher Anmeldung wird der Kunde zur Plattform zurückgeleitet...
-
-4.) ...und erhält seine kundenbezogene Ansicht, wo die Daten des Sensors angezeigt werden
-
-5.) Der Kunde kann per Knopfdruck einen neuen Sensor anlegen...
-
-6.) ...und bekommt Zertifikate zur Verbindung mit der IoT Schnittstelle zurückgeliefert 
-
-7.) Das IoT Gerät kann dann mit den Zertifikaten seine Daten an die Plattform schicken
 
 ## AWS Anwendungen
 
