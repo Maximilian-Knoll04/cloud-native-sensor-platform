@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(name = "sensordata")
@@ -15,7 +16,7 @@ public class SensordataEntity {
     private Long id;
 
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private UUID userId;
 
     @Column(nullable = false)
     private Instant timestamp;
@@ -25,7 +26,7 @@ public class SensordataEntity {
 
     public SensordataEntity() {}
 
-    public SensordataEntity(Long userId, Instant timestamp, Double temperature) {
+    public SensordataEntity(UUID userId, Instant timestamp, Double temperature) {
         this.userId = userId;
         this.timestamp = timestamp;
         this.temperature = temperature;
@@ -39,11 +40,11 @@ public class SensordataEntity {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

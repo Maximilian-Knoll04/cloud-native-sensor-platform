@@ -2,7 +2,9 @@ package de.maxknoll.app.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface SensordataRepository extends CrudRepository<SensordataEntity,Long>
+import java.util.UUID;
+
+public interface SensordataRepository extends CrudRepository<SensordataEntity,UUID>
 {
-    public Iterable<SensordataEntity> findAllByUserId(Long userId);
+    public Iterable<SensordataEntity> findAllByUserId(UUID userId);
 }

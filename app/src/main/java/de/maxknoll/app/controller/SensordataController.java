@@ -6,10 +6,13 @@ import de.maxknoll.app.repository.SensordataEntity;
 import de.maxknoll.app.service.SensordataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/sensor-data")
@@ -23,9 +26,9 @@ public class SensordataController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SensordataDTOOut>> getSensorData() {
-        Long dummy = 0L;
-        Optional<List<SensordataEntity>> entities = sensordataService.findAllByUserId(dummy);
+    public ResponseEntity<List<SensordataDTOOut>> getSensorData(@AuthenticationPrincipal OidcUser oidcUser) {
+        UUID subjectId = UUID.fromString(oidcUser.getSubject());
+        Optional<List<SensordataEntity>> entities = sensordataService.findAllByUserId(subjectId);
         if (entities.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
@@ -35,9 +38,9 @@ public class SensordataController {
     }
 
     @PostMapping
-    public ResponseEntity<SensordataDTOOut> createSensorData(@RequestBody SensordataDTOIn sensordataDTOIn) {
-        Long dummyId = 0L;
-        SensordataEntity createdEntity = sensordataService.saveSensordata(dummyId, sensordataDTOIn.temperature());
+    public ResponseEntity<SensordataDTOOut> createSensorData(@RequestBody SensordataDTOIn sensordataDTOIn, @AuthenticationPrincipal OidcUser oidcUser) {
+        UUID subjectId = UUID.fromString(oidcUser.getSubject());
+        SensordataEntity createdEntity = sensordataService.saveSensordata(subjectId, sensordataDTOIn.temperature());
         return ResponseEntity.ok(new SensordataDTOOut(createdEntity));
 
     }
