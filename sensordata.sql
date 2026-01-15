@@ -1,6 +1,6 @@
 CREATE TABLE sensordata (
                             id BIGSERIAL PRIMARY KEY,
-                            user_id BIGINT NOT NULL,
+                            user_id UUID NOT NULL,
                             timestamp TIMESTAMPTZ NOT NULL,
                             temperature DOUBLE PRECISION NOT NULL,
 
