@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class SensordataService {
@@ -20,14 +21,14 @@ public class SensordataService {
         this.sensordataRepository = sensordataRepository;
     }
 
-    public SensordataEntity saveSensordata(Long userId, Double temperature) {
+    public SensordataEntity saveSensordata(UUID userId, Double temperature) {
 
         final SensordataEntity sensordataEntity = new SensordataEntity(userId, Instant.now() ,temperature);
 
         return sensordataRepository.save(sensordataEntity);
     }
 
-    public Optional<List<SensordataEntity>> findAllByUserId(Long userId) {
+    public Optional<List<SensordataEntity>> findAllByUserId(UUID userId) {
         final var data = sensordataRepository.findAllByUserId(userId);
 
         List<SensordataEntity> listOfData = Streamable.of(data).toList();
