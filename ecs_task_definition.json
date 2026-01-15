@@ -1,0 +1,123 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:eu-central-1:962410672181:task-definition/sensorplattform-cluster-cloud-native-sensor-aba9:13",
+    "containerDefinitions": [
+        {
+            "name": "Main",
+            "image": "962410672181.dkr.ecr.eu-central-1.amazonaws.com/maxk/cloud-native-sensor@sha256:d47c77d0755e8b1e9714846eac068125c1cee2d2e9a4c942181c5fd92b40a8f6",
+            "cpu": 1024,
+            "memory": 2048,
+            "memoryReservation": 2048,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 8080,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "command": [],
+            "environment": [
+                {
+                    "name": "APP_URI",
+                    "value": "https://cl-a2b16ea083ef413095bc58593cfe00a0.ecs.eu-central-1.on.aws"
+                },
+                {
+                    "name": "DATABASE_URL",
+                    "value": "jdbc:postgresql://database-1.c58oqu0ysty1.eu-central-1.rds.amazonaws.com:5432/sensorplattform"
+                },
+                {
+                    "name": "LOGOUT_REDIRECT_URI",
+                    "value": "https://cl-a2b16ea083ef413095bc58593cfe00a0.ecs.eu-central-1.on.aws"
+                },
+                {
+                    "name": "LOGOUT_DOMAIN",
+                    "value": "https://eu-central-1sqn3unwmb.auth.eu-central-1.amazoncognito.com"
+                },
+                {
+                    "name": "COGNITO_ISSUER_URI",
+                    "value": "https://cognito-idp.eu-central-1.amazonaws.com/eu-central-1_sQn3UnwmB"
+                },
+                {
+                    "name": "COGNITO_CLIENT_ID",
+                    "value": "792lhk9ir0vd5303qdv5f65tgs"
+                },
+                {
+                    "name": "DATABASE_PASSWORD",
+                    "value": "verysafe"
+                },
+                {
+                    "name": "DATABASE_USER",
+                    "value": "postgres"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "COGNITO_CLIENT_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:eu-central-1:962410672181:secret:prod/sensorplattform/cognitosec-Ehq6t7"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/aws/ecs/sensorplattform-cluster/cloud-native-sensor-aba9-6ea0",
+                    "awslogs-region": "eu-central-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "family": "sensorplattform-cluster-cloud-native-sensor-aba9",
+    "executionRoleArn": "arn:aws:iam::962410672181:role/service-role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 13,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.secrets.asm.environment-variables"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
+    ],
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "registeredAt": "2026-01-15T20:12:24.393000+01:00",
+    "enableFaultInjection": false
+}
