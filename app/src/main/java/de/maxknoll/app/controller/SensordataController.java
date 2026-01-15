@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("/sensor-data")
 public class SensordataController {
 
@@ -26,22 +28,24 @@ public class SensordataController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SensordataDTOOut>> getSensorData(@AuthenticationPrincipal OidcUser oidcUser) {
+    public String handleGetSensorData(@AuthenticationPrincipal OidcUser oidcUser, Model model) {
         UUID subjectId = UUID.fromString(oidcUser.getSubject());
         Optional<List<SensordataEntity>> entities = sensordataService.findAllByUserId(subjectId);
         if (entities.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return "home";
         } else {
             List<SensordataDTOOut> dtoOuts = entities.get().stream().map(SensordataDTOOut::new).toList();
-            return ResponseEntity.ok(dtoOuts);
+            model.addAttribute("sensorData", dtoOuts);
+            return "home";
         }
     }
 
     @PostMapping
-    public ResponseEntity<SensordataDTOOut> createSensorData(@RequestBody SensordataDTOIn sensordataDTOIn, @AuthenticationPrincipal OidcUser oidcUser) {
+    public String handleCreateSensorData(@ModelAttribute("newSensorDate") SensordataDTOIn sensordataDTOIn, @AuthenticationPrincipal OidcUser oidcUser, Model model) {
         UUID subjectId = UUID.fromString(oidcUser.getSubject());
         SensordataEntity createdEntity = sensordataService.saveSensordata(subjectId, sensordataDTOIn.temperature());
-        return ResponseEntity.ok(new SensordataDTOOut(createdEntity));
+
+        return "redirect:/sensor-data";
 
     }
 }

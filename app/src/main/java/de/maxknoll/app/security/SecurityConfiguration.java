@@ -1,5 +1,6 @@
 package de.maxknoll.app.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -17,9 +18,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    private final CognitoLogoutHandler cognitoLogoutHandler;
+
+    @Autowired
+    public SecurityConfiguration(CognitoLogoutHandler cognitoLogoutHandler) {
+        this.cognitoLogoutHandler = cognitoLogoutHandler;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        CognitoLogoutHandler cognitoLogoutHandler = new CognitoLogoutHandler();
 
         http.csrf(Customizer.withDefaults())
                 .authorizeHttpRequests(authz -> authz

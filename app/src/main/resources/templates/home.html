@@ -3,21 +3,41 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AWS Cognito Demo App</title>
+    <title>Cloud Sensor Logging Plattform</title>
 </head>
 <body>
 <div>
     <div>
-        <h1>AWS Cognito Demo App</h1>
+        <h1>Cloud Sensor Logging Plattform</h1>
 
         <div sec:authorize="isAuthenticated()">
             <div>
                 Hello, <strong th:text="${#authentication.name}"></strong>!
                 <br>
                 <br>
+                <form action="#" th:action="@{/sensor-data}" th:object="${newSensorDate}" method="POST">
+                    <label>Temperature</label>
+                    <input type="number" th:field="*{temperature}">
+                    <button type="submit">Log</button>
+                </form>
+                <h2>Logs</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Temperature (°C)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="sensorDate: ${sensorData}">
+                        <td th:text="${sensorDate.timestamp()}"></td>
+                        <td th:text="${sensorDate.temperature()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
             <div>
-                Here are all the OIDC properties you can use: <div th:text="${#authentication.getPrincipal()}"/>
+
                 <br>
                 <br>
             </div>
