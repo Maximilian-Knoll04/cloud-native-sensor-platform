@@ -28,19 +28,19 @@ public class CognitoLogoutHandler extends SimpleUrlLogoutSuccessHandler {
     /**
      * The domain of your user pool.
      */
-//    private String domain = "https://eu-central-1n2ffqea6l.auth.eu-central-1.amazoncognito.com" ;
+
 
     /**
      * An allowed callback URL.
      */
 
-//    private String logoutRedirectUrl = "https://cl-a2b16ea083ef413095bc58593cfe00a0.ecs.eu-central-1.on.aws";
+
 
 
     /**
      * The ID of your User Pool Client.
      */
-//    private String userPoolClientId = "1vt7mo8a1862q1gtaiqg845du1";
+
 
     /**
      * Here, we must implement the new logout URL request. We define what URL to send our request to, and set out client_id and logout_uri parameters.

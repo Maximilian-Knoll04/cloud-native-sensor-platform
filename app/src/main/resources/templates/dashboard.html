@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sensor Dashboard</title>
+    <style>
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Sensor Dashboard</h1>
+
+<p>
+    Hello, <strong th:text="${#authentication.name}"></strong>
+</p>
+
+<form method="POST"
+      th:action="@{/sensor-data}"
+      th:object="${newSensorDate}">
+
+    <label>Temperature</label>
+    <input required th:field="*{temperature}" type="number">
+    <button type="submit">Log</button>
+</form>
+
+<h2>Logs</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Timestamp</th>
+        <th>Temperature (°C)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sensorData : ${sensorData}">
+        <td th:text="${sensorData.timestamp}"></td>
+        <td th:text="${sensorData.temperature}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/logout}">
+    <button>Log out</button>
+</a>
+
+</body>
+</html>

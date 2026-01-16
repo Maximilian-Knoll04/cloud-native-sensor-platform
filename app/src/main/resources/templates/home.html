@@ -1,57 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cloud Sensor Logging Plattform</title>
+    <meta charset="UTF-8">
+    <title>Cloud Sensor Logging Platform</title>
 </head>
 <body>
-<div>
-    <div>
-        <h1>Cloud Sensor Logging Plattform</h1>
 
-        <div sec:authorize="isAuthenticated()">
-            <div>
-                Hello, <strong th:text="${#authentication.name}"></strong>!
-                <br>
-                <br>
-                <form action="#" th:action="@{/sensor-data}" th:object="${newSensorDate}" method="POST">
-                    <label>Temperature</label>
-                    <input type="number" th:field="*{temperature}">
-                    <button type="submit">Log</button>
-                </form>
-                <h2>Logs</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Timestamp</th>
-                        <th>Temperature (°C)</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="sensorDate: ${sensorData}">
-                        <td th:text="${sensorDate.timestamp()}"></td>
-                        <td th:text="${sensorDate.temperature()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
+<h1>Cloud Sensor Logging Platform</h1>
 
-                <br>
-                <br>
-            </div>
-            <div>
-                <a th:href="@{/logout}"><button>Log out</button></a>
-            </div>
-        </div>
+<a th:href="@{/oauth2/authorization/cognito}">
+    <button>Log in</button>
+</a>
 
-        <div sec:authorize="isAnonymous()">
-            <div>
-                <a th:href="@{/oauth2/authorization/cognito}"><button>Log in</button></a>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
