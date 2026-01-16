@@ -34,7 +34,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/actuator/health").permitAll()
                         .anyRequest()
                         .authenticated())
-                .oauth2Login(Customizer.withDefaults())
+                .oauth2Login(oauth -> oauth
+                        .defaultSuccessUrl("/sensor-data", true)
+                )
                 .logout(logout -> logout.logoutSuccessHandler(cognitoLogoutHandler));
         return http.build();
     }

@@ -39,11 +39,11 @@ public class SensordataController {
         UUID subjectId = UUID.fromString(oidcUser.getSubject());
         Optional<List<SensordataEntity>> entities = sensordataService.findAllByUserId(subjectId);
         if (entities.isEmpty()) {
-            return "home";
+            return "dashboard";
         } else {
             List<SensordataDTOOut> dtoOuts = entities.get().stream().map(SensordataDTOOut::new).toList();
             model.addAttribute("sensorData", dtoOuts);
-            return "home";
+            return "dashboard";
         }
     }
 
