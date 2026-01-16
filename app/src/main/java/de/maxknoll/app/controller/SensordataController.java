@@ -35,6 +35,7 @@ public class SensordataController {
 
     @GetMapping
     public String handleGetSensorData(@AuthenticationPrincipal OidcUser oidcUser, Model model) {
+        model.addAttribute("newSensorDate", new SensordataDTOIn(null));
         UUID subjectId = UUID.fromString(oidcUser.getSubject());
         Optional<List<SensordataEntity>> entities = sensordataService.findAllByUserId(subjectId);
         if (entities.isEmpty()) {
