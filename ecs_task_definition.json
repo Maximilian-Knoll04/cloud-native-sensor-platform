@@ -43,21 +43,20 @@
                 },
                 {
                     "name": "DATABASE_PASSWORD",
-                    "value": "verysafe"
+                    "value": "<Database_Password>"
                 },
                 {
                     "name": "DATABASE_USER",
                     "value": "postgres"
+                },
+                {
+                    "name": "COGNITO_CLIENT_SECRET_KEY",
+                    "value": "<Cognito_Client_Secret_Key>"
                 }
             ],
             "mountPoints": [],
             "volumesFrom": [],
-            "secrets": [
-                {
-                    "name": "COGNITO_CLIENT_SECRET",
-                    "valueFrom": "arn:aws:secretsmanager:eu-central-1:962410672181:secret:prod/sensorplattform/cognitosec-Ehq6t7"
-                }
-            ],
+            "secrets": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {

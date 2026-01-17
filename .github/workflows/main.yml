@@ -33,6 +33,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - name: Add Secrets to Task Definition
+        run: |
+          sed -i "s/<Database_Password>/$DATABASE_PASSWORD/g" $ECS_TASK_DEFINITION
+          sed -i "s/<Cognito_Client_Secret_Key>/$COGNITO_CLIENT_SECRET_KEY/g" $ECS_TASK_DEFINITION
+        env:
+          DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          COGNITO_CLIENT_SECRET_KEY: ${{secrets.COGNITO_CLIENT_SECRET_KEY}}
+
       - name: Setup Java 
         uses: actions/setup-java@v5
         with:
