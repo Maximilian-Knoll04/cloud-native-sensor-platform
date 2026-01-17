@@ -53,7 +53,7 @@ public class SensordataController {
         UUID subjectId = UUID.fromString(oidcUser.getSubject());
         SensordataEntity createdEntity = sensordataService.saveSensordata(subjectId, sensordataDTOIn.temperature());
 
-        logger.info("User " + subjectId + " created a new SensorDate with id " + createdEntity.getId());
+        logger.info("User {} created a new SensorDate with id {}", subjectId, createdEntity.getId());
 
         return "redirect:/sensor-data";
 
