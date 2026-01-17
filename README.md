@@ -105,7 +105,19 @@ Die Anwendung ermöglicht die schnelle und einfache Erstellung von Datenbanken m
 
 Nach dem Betätigen von `Log in` wird man auf die Login Page des eigenen User Pools geleitet um sich anzumelden.
 
+<img width="1276" height="704" alt="image" src="https://github.com/user-attachments/assets/cc8beb9f-656f-4432-9fed-4dcefdcc1f26" />
+
+
 Nach erfolgreicher Anmeldung landet man auf der Hautpseite.
 
+<img width="511" height="434" alt="image" src="https://github.com/user-attachments/assets/2dfc54b1-f4bd-4e33-82ff-730455f33705" />
+
+
 Dort kann der Kunde seine Messungen einsehen und neue anlegen.
+
+<img width="345" height="351" alt="image" src="https://github.com/user-attachments/assets/61f8a588-75e9-40a4-8fba-706204fe3968" />
+<img width="342" height="390" alt="image" src="https://github.com/user-attachments/assets/0dd65f25-6cf4-41ef-967d-b04b6ac6dcea" />
+
+Mit anschließendem Klick auf `Log out` kommt man wieder auf die Startseite.
+
 
